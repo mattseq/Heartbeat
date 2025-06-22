@@ -55,7 +55,7 @@ public class ScreenShakeEffectHandler {
         }
     }
 
-    public static void triggerShake(int durationTicks) {
+    public static void trigger(int durationTicks) {
         shakeTicks = durationTicks;
         totalShakeTicks = durationTicks;
         tickCounter = 0;

@@ -1,28 +1,25 @@
 package net.mattseq.heartbeat.breathing;
 
+import net.mattseq.heartbeat.Heartbeat;
+import net.mattseq.heartbeat.meters.FatigueMeter;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ComputeFovModifierEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = "heartbeat", value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = Heartbeat.MODID, value = Dist.CLIENT)
 public class BreathingEffectHandler {
     private static float breathingTimer = 0.0f;
     private static boolean breathingEnabled = false;
     private static float currentOffset = 0.0f;
     private static float currentFatigue = 0.0f;
 
-    public static void setBreathingEnabled(boolean enabled) {
-        breathingEnabled = enabled;
-    }
-
-    public static void setFatigue(float fatigue) {
-        currentFatigue = fatigue;
-    }
-
     @SubscribeEvent
     public static void onFovModify(ComputeFovModifierEvent event) {
         float baseFov = event.getFovModifier();
+
+        breathingEnabled = FatigueMeter.getFatigue() > 0.4f;
+        currentFatigue = FatigueMeter.getFatigue();
 
         if (!breathingEnabled) {
             // Smoothly return to normal FOV

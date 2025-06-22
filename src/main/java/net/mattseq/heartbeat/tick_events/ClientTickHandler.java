@@ -3,6 +3,7 @@ package net.mattseq.heartbeat.tick_events;
 import net.mattseq.heartbeat.Heartbeat;
 import net.mattseq.heartbeat.HeartbeatEffects;
 import net.mattseq.heartbeat.meters.FatigueMeter;
+import net.mattseq.heartbeat.meters.FearMeter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraftforge.api.distmarker.Dist;
@@ -12,7 +13,6 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = Heartbeat.MODID, value = Dist.CLIENT)
 public class ClientTickHandler {
-    public static final FatigueMeter fatigueMeter = new FatigueMeter();
 
     @SubscribeEvent
     public static void onClientTick(TickEvent.ClientTickEvent event) {
@@ -22,7 +22,7 @@ public class ClientTickHandler {
         LocalPlayer player = mc.player;
         if (player == null) return;
 
-        fatigueMeter.update(player);
-        HeartbeatEffects.updateBreathingEffect(fatigueMeter.getFatigue());
+        FatigueMeter.update(player);
+        FearMeter.update(player);
     }
 }

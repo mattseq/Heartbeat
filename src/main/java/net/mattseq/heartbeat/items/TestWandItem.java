@@ -1,6 +1,6 @@
 package net.mattseq.heartbeat.items;
 
-import net.mattseq.heartbeat.HeartbeatEffects;
+import net.mattseq.heartbeat.screen_shake.ScreenShakeEffectHandler;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -16,9 +16,9 @@ public class TestWandItem extends Item {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
-//        CameraRenderEvent.triggerShake(100);
+        ScreenShakeEffectHandler.trigger(100);
 //        HandRenderEvent.triggerShake(100);
-        HeartbeatEffects.updateBreathingEffect(10);
+//        HeartbeatEffects.updateBreathingEffect(10);
         return super.use(pLevel, pPlayer, pUsedHand);
     }
 }
